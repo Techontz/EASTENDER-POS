@@ -61,17 +61,17 @@ function LoginPage({ onLogin }: { onLogin: (user: any) => void }) {
         permissions: ["all"]
       },
       {
-        username: "cashier1",
-        password: "cashier123",
-        full_name: "Sales Cashier",
-        role_name: "Cashier",
-        permissions: ["retail-sales"]
+        username: "hr_manager",
+        password: "hr123",
+        full_name: "HR Manager",
+        role_name: "HR Manager",
+        permissions: ["dashboard", "hr"]
       },
       {
         username: "manager_tz",
         password: "manager123",
         full_name: "Branch Manager",
-        role_name: "Manager",
+        role_name: "Branch Manager",
         permissions: [
           "dashboard",
           "import-orders",
@@ -81,9 +81,16 @@ function LoginPage({ onLogin }: { onLogin: (user: any) => void }) {
           "logistics",
           "finance"
         ]
+      },
+      {
+        username: "cashier1",
+        password: "cashier123",
+        full_name: "Sales Cashier",
+        role_name: "Cashier",
+        permissions: ["retail-sales"]
       }
     ];
-  
+    
     const user = users.find(
       u => u.username === username && u.password === password
     );

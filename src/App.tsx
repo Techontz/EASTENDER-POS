@@ -49,21 +49,48 @@ function LoginPage({ onLogin }: { onLogin: (user: any) => void }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        onLogin(data.user);
-      } else {
-        setError(data.message);
+  
+    const users = [
+      {
+        username: "admin",
+        password: "admin123",
+        full_name: "System Administrator",
+        role_name: "Admin",
+        permissions: ["all"]
+      },
+      {
+        username: "cashier1",
+        password: "cashier123",
+        full_name: "Sales Cashier",
+        role_name: "Cashier",
+        permissions: ["retail-sales"]
+      },
+      {
+        username: "manager_tz",
+        password: "manager123",
+        full_name: "Branch Manager",
+        role_name: "Manager",
+        permissions: [
+          "dashboard",
+          "import-orders",
+          "procurement",
+          "inventory",
+          "retail-sales",
+          "logistics",
+          "finance"
+        ]
       }
-    } catch (err) {
+    ];
+  
+    const user = users.find(
+      u => u.username === username && u.password === password
+    );
+  
+    if (user) {
+      onLogin(user);
+    } else {
       setError("Login failed. Please try again.");
     }
   };
